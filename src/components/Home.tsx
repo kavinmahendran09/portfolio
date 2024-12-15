@@ -3,6 +3,7 @@ import Navbar from './Navbar'; // Import the Navbar component
 import HeroSection from './HeroSection'; // Import the HeroSection component
 import About from './About';
 import Projects from './Projects';
+import Contact from './Contact';
 
 
 const Home: React.FC = () => {
@@ -15,6 +16,7 @@ const Home: React.FC = () => {
       <HeroSection />
       <About />
       <Projects />
+      <Contact />
     </div>
   );
 };
