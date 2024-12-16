@@ -3,7 +3,6 @@ import React from 'react';
 const Timeline: React.FC = () => {
   return (
     <section style={{ padding: '50px 20px', color: '#ffffff' }}>
-      {/* Title Section */}
       <div className="container">
         <div className="row">
           <div className="col-12">
@@ -22,7 +21,6 @@ const Timeline: React.FC = () => {
         </div>
       </div>
 
-      {/* Timeline Section */}
       <div className="timeline-container">
         <div className="timeline-line">
           <div className="timeline-item left">
@@ -72,7 +70,6 @@ const Timeline: React.FC = () => {
         </div>
       </div>
 
-      {/* Add CSS animations */}
       <style>{`
         .timeline-container {
           position: relative;

@@ -12,7 +12,7 @@ const HeroSection: React.FC = () => {
         textAlign: 'center',
         padding: '20px',
         color: '#ffffff',
-        background: '#0f1217', // Dark background
+        background: '#0f1217', 
         position: 'relative',
         overflow: 'hidden',
       }}
@@ -20,7 +20,7 @@ const HeroSection: React.FC = () => {
       <div>
         <h1
           style={{
-            fontSize: '8vw', // Font size based on viewport width (responsive)
+            fontSize: '8vw', 
             fontWeight: 'bold',
             marginBottom: '20px',
             textTransform: 'uppercase',
@@ -44,7 +44,7 @@ const HeroSection: React.FC = () => {
         >
           <p
             style={{
-              animation: 'scrollText 10s linear infinite', // Apply animation for scrolling effect
+              animation: 'scrollText 10s linear infinite', 
               margin: 0,
               whiteSpace: 'nowrap',
             }}
@@ -54,7 +54,6 @@ const HeroSection: React.FC = () => {
         </div>
       </div>
 
-      {/* Add CSS animation */}
       <style>{`
         @keyframes scrollText {
           0% {

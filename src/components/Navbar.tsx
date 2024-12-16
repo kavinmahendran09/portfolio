@@ -5,47 +5,85 @@ import classNames from 'classnames';
 const Navbar: React.FC = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isNavbarScrolled, setNavbarScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState<string>(''); 
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen((prev) => !prev);
   };
 
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      const offset = id === 'about' ? 100 : 60; 
+      window.scrollTo({
+        top: element.offsetTop - offset,
+        behavior: 'smooth',
+      });
+    }
+  };
+
+
+  const handleScroll = () => {
+    const sections = ['about', 'projects', 'contact'];
+    const heroSection = document.getElementById('heroSection');
+    const scrollPosition = window.scrollY;
+
+    // If HeroSection is in view, do not set 'About' as active
+    if (heroSection && heroSection.getBoundingClientRect().top > 0) {
+      setActiveSection('');
+    } else {
+      for (let i = 0; i < sections.length; i++) {
+        const section = document.getElementById(sections[i]);
+        if (section && section.getBoundingClientRect().top <= window.innerHeight / 2) {
+          setActiveSection(sections[i]);
+        }
+      }
+    }
+
+    
+    if (scrollPosition < 50) {
+      setActiveSection('');
+    }
+
+    setNavbarScrolled(scrollPosition > 100); 
+  };
+
   useEffect(() => {
-    const handleScroll = () => {
-      setNavbarScrolled(window.scrollY > 100); // Adjust threshold for scroll
+    const handleScrollEvent = () => {
+      handleScroll();
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScrollEvent);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('scroll', handleScrollEvent);
     };
   }, []);
 
   return (
     <nav
       className={classNames('navbar navbar-expand-lg navbar-dark', {
-        'navbar-scrolled': isNavbarScrolled, // Apply styles when scrolled
+        'navbar-scrolled': isNavbarScrolled,
       })}
       style={{
-        backgroundColor: 'rgba(15, 18, 23, 0.7)', // Slightly transparent background
-        backdropFilter: 'blur(10px)', // Frosted glass effect
+        backgroundColor: 'rgba(15, 18, 23, 0.7)',
+        backdropFilter: 'blur(10px)',
         borderRadius: '40px',
-        padding: '10px 30px', // Added padding to the left and right of the contents
-        boxShadow: isNavbarScrolled ? '0 4px 8px rgba(0, 0, 0, 0.3)' : 'none', // Add shadow when scrolled
-        position: 'fixed', // Make navbar fixed at the top
-        top: '20px', // Add space at the top (this ensures it's not touching the top of the viewport)
-        left: '20px', // Add space to the left side
-        right: '20px', // Add space to the right side
+        padding: '10px 30px',
+        boxShadow: isNavbarScrolled ? '0 4px 8px rgba(0, 0, 0, 0.3)' : 'none',
+        position: 'fixed',
+        top: '20px',
+        left: '20px',
+        right: '20px',
         zIndex: 1000,
-        border: '2px solid #ffffff', // White border
-        width: 'calc(100% - 40px)', // Ensures the navbar width is adjusted based on left and right padding
-        transition: 'box-shadow 0.3s ease, background-color 0.3s ease', // Smooth transition for background and shadow
+        border: '2px solid #ffffff',
+        width: 'calc(100% - 40px)',
+        transition: 'box-shadow 0.3s ease, background-color 0.3s ease',
       }}
     >
-      {/* Brand Name */}
       <Link
         className="navbar-brand"
         to="/"
+        onClick={() => window.scrollTo(0, 0)}
         style={{
           fontSize: '1.5rem',
           color: '#ffffff',
@@ -56,7 +94,6 @@ const Navbar: React.FC = () => {
         Kavin
       </Link>
 
-      {/* Hamburger Menu for mobile view */}
       <button
         onClick={toggleMobileMenu}
         className="navbar-toggler"
@@ -73,7 +110,6 @@ const Navbar: React.FC = () => {
         <span className="navbar-toggler-icon"></span>
       </button>
 
-      {/* Navigation Links */}
       <div
         className={classNames('collapse navbar-collapse', {
           show: isMobileMenuOpen,
@@ -92,8 +128,12 @@ const Navbar: React.FC = () => {
         >
           <li className="nav-item">
             <a
-              className="nav-link"
+              className={classNames('nav-link', { active: activeSection === 'about' })}
               href="#about"
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection('about');
+              }}
               style={{
                 fontSize: '1.2rem',
                 fontWeight: 500,
@@ -105,8 +145,12 @@ const Navbar: React.FC = () => {
           </li>
           <li className="nav-item">
             <a
-              className="nav-link"
+              className={classNames('nav-link', { active: activeSection === 'projects' })}
               href="#projects"
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection('projects');
+              }}
               style={{
                 fontSize: '1.2rem',
                 fontWeight: 500,
@@ -118,8 +162,12 @@ const Navbar: React.FC = () => {
           </li>
           <li className="nav-item">
             <a
-              className="nav-link"
+              className={classNames('nav-link', { active: activeSection === 'contact' })}
               href="#contact"
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection('contact');
+              }}
               style={{
                 fontSize: '1.2rem',
                 fontWeight: 500,

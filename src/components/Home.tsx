@@ -1,22 +1,29 @@
 import React from 'react';
-import Navbar from './Navbar'; // Import the Navbar component
-import HeroSection from './HeroSection'; // Import the HeroSection component
+import Navbar from './Navbar';
+import HeroSection from './HeroSection';
 import About from './About';
 import Projects from './Projects';
 import Contact from './Contact';
-
+import Footer from './Footer';
 
 const Home: React.FC = () => {
   return (
-    <div style={{ backgroundColor: '#0f1217', color: '#ffffff', minHeight: '100vh', padding: '20px' }}>
-      {/* Navbar */}
+    <div style={{ backgroundColor: '#0f1217', color: '#ffffff', padding: '20px' }}>
       <Navbar />
-
-      {/* Hero Section */}
       <HeroSection />
-      <About />
-      <Projects />
-      <Contact />
+      <div id="about">
+        <About />
+      </div>
+
+      <div id="projects">
+        <Projects />
+      </div>
+
+      <div id="contact">
+        <Contact />
+      </div>
+
+      <Footer />
     </div>
   );
 };
