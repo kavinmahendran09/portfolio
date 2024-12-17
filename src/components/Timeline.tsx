@@ -1,6 +1,28 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
 const Timeline: React.FC = () => {
+  const timelineRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    const timelineItems = timelineRef.current?.querySelectorAll('.timeline-item');
+    timelineItems?.forEach((item) => observer.observe(item));
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   return (
     <section style={{ padding: '50px 20px', color: '#ffffff' }}>
       <div className="container">
@@ -21,7 +43,7 @@ const Timeline: React.FC = () => {
         </div>
       </div>
 
-      <div className="timeline-container">
+      <div className="timeline-container" ref={timelineRef}>
         <div className="timeline-line">
           <div className="timeline-item left">
             <div className="timeline-dot"></div>
@@ -37,7 +59,10 @@ const Timeline: React.FC = () => {
             <div className="timeline-content">
               <p className="timeline-title">Undergraduate</p>
               <p className="timeline-year">2022-2026</p>
-              <p className="timeline-text">Pursuing a Bachelor's degree in Computer Science and engineering with specialisation in Artificial Intelligance and Machine Learning at SRM Institute of Science and Technology, expected to graduate in 2026.</p>
+              <p className="timeline-text">
+                Pursuing a Bachelor's degree in Computer Science and engineering with specialisation in Artificial
+                Intelligence and Machine Learning at SRM Institute of Science and Technology, expected to graduate in 2026.
+              </p>
             </div>
           </div>
 
@@ -64,7 +89,18 @@ const Timeline: React.FC = () => {
             <div className="timeline-content">
               <p className="timeline-title">Current</p>
               <p className="timeline-year">2024</p>
-              <p className="timeline-text"> Currently working on <a href="https://github.com/kavinmahendran09/acehive" target="_blank" rel="noopener noreferrer" style={{ color: '#007bff', textDecoration: 'none' }}>Acehive</a> and learning new web technologies.</p>
+              <p className="timeline-text">
+                Currently working on{' '}
+                <a
+                  href="https://github.com/kavinmahendran09/acehive"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: '#007bff', textDecoration: 'none' }}
+                >
+                  Acehive
+                </a>{' '}
+                and learning new web technologies.
+              </p>
             </div>
           </div>
         </div>
@@ -88,6 +124,9 @@ const Timeline: React.FC = () => {
           display: flex;
           justify-content: flex-start;
           width: 100%;
+          opacity: 0;
+          transform: translateY(50px);
+          transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
 
         .timeline-item.left {
@@ -132,6 +171,11 @@ const Timeline: React.FC = () => {
           font-size: 1.2rem;
           color: #ccc;
           margin-top: 10px;
+        }
+
+        .timeline-item.visible {
+          opacity: 1;
+          transform: translateY(0);
         }
 
         @media (min-width: 768px) {

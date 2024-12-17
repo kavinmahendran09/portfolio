@@ -49,7 +49,7 @@ const About: React.FC = () => {
             >
               Kavin Bharathi
             </p>
-            <div style={{ display: "flex", justifyContent: "center", gap: "20px" }}>
+            <div style={{ display: "flex", justifyContent: "center", gap: "20px" , marginBottom : "50px" }}>
               <a href="https://github.com/yourgithub" target="_blank" rel="noopener noreferrer">
                 <FaGithub size={30} color="white" />
               </a>
