@@ -50,10 +50,10 @@ const About: React.FC = () => {
               Kavin Bharathi
             </p>
             <div style={{ display: "flex", justifyContent: "center", gap: "20px" , marginBottom : "50px" }}>
-              <a href="https://github.com/yourgithub" target="_blank" rel="noopener noreferrer">
+              <a href="https://github.com/kavinmahendran09" target="_blank" rel="noopener noreferrer">
                 <FaGithub size={30} color="white" />
               </a>
-              <a href="https://www.linkedin.com/in/yourlinkedin/" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.linkedin.com/in/kavin-bharathi-081577252/" target="_blank" rel="noopener noreferrer">
                 <FaLinkedin size={30} color="lightblue" />
               </a>
             </div>
