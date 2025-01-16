@@ -24,7 +24,7 @@ const Contact: React.FC = () => {
         <Row className="align-items-center">
           <Col xs={12} md={5}>
             <a
-              href="https://drive.google.com/file/d/1NBFFYmTaBdEDTYv54bQ3rf9xUdaXB4Rs/view?usp=sharing" 
+              href="https://drive.google.com/file/" 
               target="_blank"
               rel="noopener noreferrer"
               style={{ width: '100%' }}
